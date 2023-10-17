@@ -1,5 +1,6 @@
 # resume-chatbot
 A chatbot for recruiters to query information about a job applicant.
+Example: https://bearden-resume-chatbot-2d3e7f033a89.herokuapp.com
 
 ## Usage
 1. Upload applicant text files into [res/data](./res/data) directories. Each directory becomes a tool. Add or remove directories if 
