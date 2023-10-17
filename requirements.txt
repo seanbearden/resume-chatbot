@@ -5,4 +5,5 @@ Flask==2.2.5
 langchain==0.0.315
 openai==0.28.1
 python-dotenv==1.0.0
+tiktoken==0.5.1
 gunicorn
