@@ -1,0 +1,5 @@
+dash==2.14.0
+langchain==0.0.315
+python-dotenv==1.0.0
+gunicorn
+
