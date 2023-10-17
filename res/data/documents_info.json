@@ -1,0 +1,12 @@
+{
+  "cv_tool": {
+    "description": "Searches and returns documents regarding applicant's curriculum vitae. Contains information on various academic pursuits.",
+    "directory_path": "res/data/cv",
+    "save_path": "res/indices/cv"
+  },
+  "resume_tool": {
+    "description": "Searches and returns documents regarding applicant's resume. Contains information on employable skills and experience.",
+    "directory_path": "res/data/resume",
+    "save_path": "res/indices/resume"
+  }
+}
