@@ -1,5 +1,8 @@
 dash==2.14.0
+fast-dash==0.2.6
+Flask==2.2.5
 langchain==0.0.315
 python-dotenv==1.0.0
 gunicorn
+
 
