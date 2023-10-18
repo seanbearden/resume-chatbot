@@ -17,6 +17,16 @@ Create vector stores for:
 * GitHub
 * Thesis
 
+## Custom Domain
+```(venv) resume-chatbot$ heroku domains:add www.bearden-resume-bot.com
+Configure your app's DNS provider to point to the DNS Target 
+mechanistic-toucan-8v8puv00b8px1luvx3unvi5c.herokudns.com.
+    For help, see https://devcenter.heroku.com/articles/custom-domains
+
+The domain www.bearden-resume-bot.com has been enqueued for addition
+Run heroku domains:wait 'www.bearden-resume-bot.com' to wait for completion
+Adding www.bearden-resume-bot.com to ⬢ bearden-resume-chatbot... done
+```
 
 ## References
 * A modification of a Dash Gallery app: https://github.com/dkedar7/embedchain-fastdash
