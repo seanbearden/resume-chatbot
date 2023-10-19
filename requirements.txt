@@ -1,6 +1,6 @@
 dash==2.14.0
 faiss-cpu==1.7.4
-fast-dash==0.2.6
+fast-dash==0.2.7
 Flask==2.2.5
 langchain==0.0.315
 openai==0.28.1
