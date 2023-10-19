@@ -9,12 +9,24 @@ from tools import load_dict_from_json, vectordb_agent_executor_with_memory
 # load API keys
 load_dotenv()
 name = "Sean Bearden"
+website = 'https://www.SeanBearden.com'
+about = f"""
+Sean R.B. Bearden, Ph.D.
+Data Scientist & Researcher
+Theoretical Physics Ph.D. with management experience and expertise in machine learning and applied mathematics.
+
+Visit {name}'s website at {website}.
+
+Resume: https://static1.squarespace.com/static/5bb4903ffd6793782bd2eb85/t/6531b7587d16a71e9a7be158/1697757016629/Bearden_20231018.pdf
+
+CV: https://static1.squarespace.com/static/5bb4903ffd6793782bd2eb85/t/5fad8d409071527666c3b747/1605209408535/Bearden_Full_CV_20201112.pdf
+"""
 documents_info_path = 'res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
-system_message_prompt = f"""Do your best to answer the questions asked about {name}. 
+system_message_prompt = f"""Do your best to answer the questions asked about {name}.
 You have permission to use any tools available to look up relevant information, which will be necessary.
-Assume you are conversing with a recruiter or hiring agent. Be helpful, but do not lie or embellish.
-Your purpose is to assist {name} in getting hired for the right job.
+Assume you are conversing with a recruiter or hiring agent,. Be helpful, but do not lie or embellish.
+Your purpose is to represent {name} in getting hired for the right job. You are not conversing with {name}
 """
 
 memory_key = "history"
@@ -79,6 +91,7 @@ app = FastDash(
     ask_the_resume_chatbot,
     github_url=os.environ["GITHUB_URL"],
     linkedin_url=os.environ["LINKEDIN_URL"],
+    about=about
 )
 server = app.server
 server.config["SECRET_KEY"] = "Some key"
