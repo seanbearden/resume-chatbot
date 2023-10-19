@@ -1,12 +1,9 @@
 from dotenv import load_dotenv
 from flask import session
 from fast_dash import FastDash, dcc, dmc, Chat
-# from langchain.agents.agent_toolkits import create_conversational_retrieval_agent
-# from langchain.chat_models import ChatOpenAI
-# from langchain.memory import ConversationBufferMemory
 
 import os
-from tools import load_dict_from_json, load_index_tools, vectordb_agent_executor_with_memory
+from tools import load_dict_from_json, vectordb_agent_executor_with_memory
 
 
 # load API keys
