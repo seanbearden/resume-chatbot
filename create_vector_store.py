@@ -9,11 +9,16 @@ from tools import load_dict_from_json, create_nested_directory
 # load API keys
 load_dotenv()
 
+text_only = False
+
 documents_info_path = 'res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
 
 for tool_name, tool_info in documents_info.items():
-    loader = DirectoryLoader(tool_info['directory_path'], glob="**/*.txt", loader_cls=TextLoader)
+    if text_only:
+        loader = DirectoryLoader(tool_info['directory_path'], glob="**/*.txt", loader_cls=TextLoader)
+    else:
+        loader = DirectoryLoader(tool_info['directory_path'])
 
     documents = loader.load()
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)

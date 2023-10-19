@@ -6,32 +6,33 @@ from fast_dash import FastDash, dcc, dmc, Chat
 # from langchain.memory import ConversationBufferMemory
 
 import os
-from tools import load_dict_from_json, load_index_tools, vectordb_qa_with_memory
+from tools import load_dict_from_json, load_index_tools, vectordb_agent_executor_with_memory
 
 
 # load API keys
 load_dotenv()
-
+name = "Sean Bearden"
 documents_info_path = 'res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
+system_message_prompt = f"""Do your best to answer the questions asked about {name}. 
+You have permission to use any tools available to look up relevant information, which will be necessary.
+Assume you are conversing with a recruiter or hiring agent. Be helpful, but do not lie or embellish.
+Your purpose is to assist {name} in getting hired for the right job.
+"""
 
-qa = vectordb_qa_with_memory(documents_info, temperature=0.3, model_name='gpt-3.5-turbo')
-
-# tools = load_index_tools(documents_info)
-
-# llm = ChatOpenAI(temperature=0.1)
-
-# agent_executor = create_conversational_retrieval_agent(llm, tools, verbose=False)
-
+memory_key = "history"
+agent_executor = vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key=memory_key,
+                                                     temperature=0.2,
+                                                     model_name='gpt-3.5-turbo', verbose=True)
 
 # Define components
 
 query_component = dmc.Textarea(
-    placeholder="Write your query here",
+    placeholder=f"Write your query about {name} here",
     autosize=True,
     minRows=4,
     required=True,
-    description="Write your query here",
+    description=f"Ask anything about {name}",
 )
 
 answer_component = dcc.Markdown(
@@ -53,11 +54,14 @@ def ask_the_resume_chatbot(
 
     else:
         # Get chat history from Flask session
+        # Tech Debt: need to pass chat history into agent.
         chat_history = session.get("chat_history", [])
 
         # Generate a response
-        result = qa({"question": query, "chat_history": chat_history})
-        answer = result["answer"]
+        # result = agent({"question": query, memory_key: chat_history})
+        result = agent_executor({"input": query})
+
+        answer = result["output"]
         # Save chat history back to the session cache
         chat_history.append([query, answer])
 

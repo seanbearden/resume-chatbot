@@ -4,6 +4,11 @@
     "directory_path": "res/data/cv",
     "save_path": "res/indices/cv"
   },
+    "publications_tool": {
+    "description": "Searches and returns documents regarding applicant's publications. Contains information on writing style and academic expertise.",
+    "directory_path": "res/data/publications",
+    "save_path": "res/indices/publications"
+  },
   "resume_tool": {
     "description": "Searches and returns documents regarding applicant's resume. Contains information on employable skills and experience.",
     "directory_path": "res/data/resume",
