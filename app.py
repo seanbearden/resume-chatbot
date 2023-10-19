@@ -1,11 +1,13 @@
 from dotenv import load_dotenv
 from flask import session
 from fast_dash import FastDash, dcc, dmc, Chat
-from langchain.agents.agent_toolkits import create_conversational_retrieval_agent
-from langchain.chat_models import ChatOpenAI
+# from langchain.agents.agent_toolkits import create_conversational_retrieval_agent
+# from langchain.chat_models import ChatOpenAI
+# from langchain.memory import ConversationBufferMemory
 
 import os
-from tools import load_dict_from_json, load_index_tools
+from tools import load_dict_from_json, load_index_tools, vectordb_qa_with_memory
+
 
 # load API keys
 load_dotenv()
@@ -13,11 +15,14 @@ load_dotenv()
 documents_info_path = 'res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
 
-tools = load_index_tools(documents_info)
+qa = vectordb_qa_with_memory(documents_info, temperature=0.3, model_name='gpt-3.5-turbo')
 
-llm = ChatOpenAI(temperature=0.1)
+# tools = load_index_tools(documents_info)
 
-agent_executor = create_conversational_retrieval_agent(llm, tools, verbose=False)
+# llm = ChatOpenAI(temperature=0.1)
+
+# agent_executor = create_conversational_retrieval_agent(llm, tools, verbose=False)
+
 
 # Define components
 
@@ -35,11 +40,6 @@ answer_component = dcc.Markdown(
 
 
 def ask_the_resume_chatbot(
-        # openai_api_key: openai_api_key_component,
-        # web_page_urls: web_page_urls_component,
-        # youtube_urls: web_page_urls_component,
-        # pdf_urls: web_page_urls_component,
-        # text: text_component,
         query: query_component,
 ) -> Chat:
     """
@@ -48,24 +48,19 @@ def ask_the_resume_chatbot(
     """
     answer_suffix = 'Visit SeanBearden.com for more information.'
 
-    # if not openai_api_key:
-    #     answer = "Did you forget adding your OpenAI API key? If you don't have one, you can get it [here](https://platform.openai.com/account/api-keys)."
-
     if not query:
         answer = "Did you forget writing your query in the query box?"
 
     else:
-        # os.environ["OPENAI_API_KEY"] = openai_api_key
-
         # Get chat history from Flask session
         chat_history = session.get("chat_history", [])
 
         # Generate a response
-        # answer = generate_response(web_page_urls, youtube_urls, pdf_urls, text, query, chat_history)
-        result = agent_executor({"input": query})
-        answer = result["output"]
+        result = qa({"question": query, "chat_history": chat_history})
+        answer = result["answer"]
         # Save chat history back to the session cache
         chat_history.append([query, answer])
+
         session["chat_history"] = chat_history
 
         answer = f"""{answer}
