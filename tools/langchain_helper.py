@@ -44,7 +44,8 @@ def load_index_tools(documents_info):
     return tools
 
 
-def vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key="history", temperature=0.3,
+def vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key="chat_history",
+                                        temperature=0.3,
                                         model_name='gpt-3.5-turbo', verbose=False):
     # Load the language model
     llm = ChatOpenAI(model_name=model_name, temperature=temperature)

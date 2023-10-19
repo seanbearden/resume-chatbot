@@ -22,7 +22,7 @@ Your purpose is to assist {name} in getting hired for the right job.
 
 memory_key = "history"
 agent_executor = vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key=memory_key,
-                                                     temperature=0.3,
+                                                     temperature=0.2,
                                                      model_name='gpt-3.5-turbo', verbose=True)
 
 # Define components
@@ -54,11 +54,13 @@ def ask_the_resume_chatbot(
 
     else:
         # Get chat history from Flask session
+        # Tech Debt: need to pass chat history into agent.
         chat_history = session.get("chat_history", [])
 
         # Generate a response
         # result = agent({"question": query, memory_key: chat_history})
         result = agent_executor({"input": query})
+
         answer = result["output"]
         # Save chat history back to the session cache
         chat_history.append([query, answer])
