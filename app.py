@@ -3,41 +3,38 @@ from flask import session
 from fast_dash import FastDash, dcc, dmc, Chat
 
 import os
-from tools import load_dict_from_json, vectordb_agent_executor_with_memory
-
+from tools import load_dict_from_json, vectordb_agent_executor_with_memory, get_str_template, get_parent_dir_path
 
 # load API keys
 load_dotenv()
 
-name = "Sean Bearden"
-website = 'https://www.SeanBearden.com'
-about = f"""
-Sean R.B. Bearden, Ph.D.
-Data Scientist & Researcher
-Theoretical Physics Ph.D. with management experience and expertise in machine learning and applied mathematics.
+temperature = 0.2
+model_name = 'gpt-3.5-turbo-16k'
 
-Visit {name}'s website at {website}.
+current_dir = os.getcwd()
+repo_dir = 'resume-chatbot'
+repo_path = get_parent_dir_path(current_dir, repo_dir)
 
-Resume: https://static1.squarespace.com/static/5bb4903ffd6793782bd2eb85/t/6531b7587d16a71e9a7be158/1697757016629/Bearden_20231018.pdf
+template_kwargs_path = os.path.join(repo_path, 'res/templates/template_kwargs.json')
+template_kwargs = load_dict_from_json(template_kwargs_path)
+name = template_kwargs['name']
+website = template_kwargs['website']
 
-CV: https://static1.squarespace.com/static/5bb4903ffd6793782bd2eb85/t/5fad8d409071527666c3b747/1605209408535/Bearden_Full_CV_20201112.pdf
-"""
-documents_info_path = 'res/data/documents_info.json'
+about_template_path = os.path.join(repo_path, 'res/templates/about.txt')
+about_template = get_str_template(about_template_path)
+about = about_template.substitute(**template_kwargs)
+
+documents_info_path = os.path.join(repo_path, 'res/data/documents_info.json')
 documents_info = load_dict_from_json(documents_info_path)
-temperature=0.2
-system_message_prompt = f"""Do your best to answer the questions asked about {name}.
-You have permission to use any tools available to look up relevant information, which will be necessary.
-Assume you are conversing with a recruiter or hiring agent,. Be helpful, but do not lie or embellish.
-Your purpose is to represent {name} in getting hired for the right job. You are not conversing with {name}!
 
-You may need multiple tools to answer a question. If you cannot determine an answer to a question, be sure to trying 
-using the qa_tool before giving up.
-"""
+system_message_template_path = os.path.join(repo_path, 'res/templates/system_message_prompt.txt')
+system_message_template = get_str_template(system_message_template_path)
+system_message_prompt = system_message_template.substitute(**template_kwargs)
 
 memory_key = "history"
 agent_executor = vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key=memory_key,
                                                      temperature=temperature,
-                                                     model_name='gpt-3.5-turbo', verbose=True)
+                                                     model_name=model_name, verbose=True)
 
 # Define components
 
@@ -58,10 +55,10 @@ def ask_the_resume_chatbot(
         query: query_component,
 ) -> Chat:
     """
-    Ask questions about Sean Bearden's qualification and experience. You can ask about his education and research,
+    Ask questions about applicant's qualification and experience. You can ask about his education and research,
     or his work experience.
     """
-    answer_suffix = 'Visit SeanBearden.com for more information.'
+    answer_suffix = f"Visit {website} for more information."
 
     if not query:
         answer = "Did you forget writing your query in the query box?"
@@ -94,8 +91,8 @@ def ask_the_resume_chatbot(
 # Build app (this is all it takes!). Fast Dash understands what it needs to do.
 app = FastDash(
     ask_the_resume_chatbot,
-    github_url=os.environ["GITHUB_URL"],
-    linkedin_url=os.environ["LINKEDIN_URL"],
+    github_url=template_kwargs.get("github_url", "https://github.com/"),
+    linkedin_url=template_kwargs.get("linkedin_url", "https://www.linkedin.com/"),
     about=about
 )
 server = app.server

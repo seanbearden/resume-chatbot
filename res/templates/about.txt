@@ -1,0 +1,9 @@
+Sean R.B. Bearden, Ph.D.
+Data Scientist & Researcher
+Theoretical Physics Ph.D. with management experience and expertise in machine learning and applied mathematics.
+
+Visit $name's website at $website.
+
+Resume: $resume_link
+
+CV: $cv_link
