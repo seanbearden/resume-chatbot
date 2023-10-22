@@ -12,22 +12,20 @@ temperature = 0.2
 model_name = 'gpt-3.5-turbo-16k'
 
 current_dir = os.getcwd()
-repo_dir = 'resume-chatbot'
-repo_path = get_parent_dir_path(current_dir, repo_dir)
 
-template_kwargs_path = os.path.join(repo_path, 'res/templates/template_kwargs.json')
+template_kwargs_path = './res/templates/template_kwargs.json'
 template_kwargs = load_dict_from_json(template_kwargs_path)
 name = template_kwargs['name']
 website = template_kwargs['website']
 
-about_template_path = os.path.join(repo_path, 'res/templates/about.txt')
+about_template_path = './res/templates/about.txt'
 about_template = get_str_template(about_template_path)
 about = about_template.substitute(**template_kwargs)
 
-documents_info_path = os.path.join(repo_path, 'res/data/documents_info.json')
+documents_info_path = './res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
 
-system_message_template_path = os.path.join(repo_path, 'res/templates/system_message_prompt.txt')
+system_message_template_path = './res/templates/system_message_prompt.txt'
 system_message_template = get_str_template(system_message_template_path)
 system_message_prompt = system_message_template.substitute(**template_kwargs)
 
