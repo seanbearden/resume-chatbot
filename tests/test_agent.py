@@ -15,7 +15,6 @@ load_dotenv()
 class TestAgent(unittest.TestCase):
 
     def setUp(self) -> None:
-        name = "Sean Bearden"
         current_dir = os.getcwd()
         repo_path = get_parent_dir_path(current_dir, 'resume-chatbot')
         documents_info_path = 'res/data/documents_info.json'
@@ -39,7 +38,10 @@ class TestAgent(unittest.TestCase):
             # Read the contents of the file into a string variable
             system_message_template = Template(file.read())
 
-        system_message_prompt = system_message_template.substitute(name=name)
+        template_kwargs_path = os.path.join(repo_path, 'res/templates/template_kwargs.json')
+        template_kwargs = load_dict_from_json(template_kwargs_path)
+        self.name = template_kwargs['name']
+        system_message_prompt = system_message_template.substitute(**template_kwargs)
 
         self.agent_executor = vectordb_agent_executor_with_memory(
             documents_info, system_message_prompt,
@@ -47,15 +49,15 @@ class TestAgent(unittest.TestCase):
             model_name='gpt-3.5-turbo-16k', verbose=False)
 
     def test_agent_knowledge_of_applicant(self):
-        result = self.agent_executor({"input": "Tell me about Sean Bearden"})
+        result = self.agent_executor({"input": f"Tell me about {self.name}"})
         output = result["output"].lower()
         # Test knowledge of name
-        self.assertTrue("bearden" in output)
+        self.assertTrue(self.name.split()[-1].lower() in output)
         # Test knowledge of expertise
         self.assertTrue("physics" in output)
 
     def test_agent_personal_interests(self):
-        result = self.agent_executor({"input": "What are some of Sean's interests outside of work?"})
+        result = self.agent_executor({"input": f"What are some of {self.name}'s interests outside of work?"})
         output = result["output"].lower()
         # Test knowledge of activities
         self.assertTrue("yoga" in output)
