@@ -13,5 +13,10 @@
     "description": "Searches and returns documents regarding applicant's resume. Contains information on employable skills and experience.",
     "directory_path": "res/data/resume",
     "save_path": "res/indices/resume"
+  },
+  "qa_tool": {
+  "description": "Searches and returns answers to common questions from potential employers. Contains information that may not be found using other tools.",
+  "directory_path": "res/data/qa",
+  "save_path": "res/indices/qa"
   }
 }

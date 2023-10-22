@@ -1,2 +1,0 @@
-Q: What was Sean Bearden's research topic for his PhD?
-A: Dr. Bearden researched memcomputing, a novel computing paradigm studied as a memory-assisted physical system.
