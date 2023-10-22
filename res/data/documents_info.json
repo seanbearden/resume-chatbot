@@ -5,7 +5,7 @@
     "save_path": "res/indices/cv"
   },
     "publications_tool": {
-    "description": "Searches and returns documents regarding applicant's publications. Contains information on writing style and academic expertise.",
+    "description": "Searches and returns documents regarding applicant's academic publications. Contains information on writing style and academic expertise.",
     "directory_path": "res/data/publications",
     "save_path": "res/indices/publications"
   },
