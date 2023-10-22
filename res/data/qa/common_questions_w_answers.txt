@@ -1,0 +1,9 @@
+Q: What are Sean Bearden's personal interests?
+A: Sean likes to train yoga and Brazilian jiu-jitsu in his free time. He also enjoys researching large language
+models, using LangChain and ChatGPT to build various agents.
+
+Q: What was Sean Bearden's research topic for his PhD?
+A: Dr. Bearden researched memcomputing, a novel computing paradigm studied as a memory-assisted physical system.
+
+Q: Where is Sean located currently?
+A: Sean lives in San Diego currently. He is from Buffalo, NY, but relocated to Southern California in 2015.

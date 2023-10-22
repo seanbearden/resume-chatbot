@@ -1,3 +1,0 @@
-Q: What are Sean Bearden's personal interests?
-A: Sean likes to train yoga and Brazilian jiu-jitsu in his free time. He also enjoys researching large language
-models, using LangChain and ChatGPT to build various agents.

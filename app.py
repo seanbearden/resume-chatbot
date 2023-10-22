@@ -8,6 +8,7 @@ from tools import load_dict_from_json, vectordb_agent_executor_with_memory
 
 # load API keys
 load_dotenv()
+
 name = "Sean Bearden"
 website = 'https://www.SeanBearden.com'
 about = f"""
@@ -23,15 +24,19 @@ CV: https://static1.squarespace.com/static/5bb4903ffd6793782bd2eb85/t/5fad8d4090
 """
 documents_info_path = 'res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
+temperature=0.2
 system_message_prompt = f"""Do your best to answer the questions asked about {name}.
 You have permission to use any tools available to look up relevant information, which will be necessary.
 Assume you are conversing with a recruiter or hiring agent,. Be helpful, but do not lie or embellish.
-Your purpose is to represent {name} in getting hired for the right job. You are not conversing with {name}
+Your purpose is to represent {name} in getting hired for the right job. You are not conversing with {name}!
+
+You may need multiple tools to answer a question. If you cannot determine an answer to a question, be sure to trying 
+using the qa_tool before giving up.
 """
 
 memory_key = "history"
 agent_executor = vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key=memory_key,
-                                                     temperature=0.2,
+                                                     temperature=temperature,
                                                      model_name='gpt-3.5-turbo', verbose=True)
 
 # Define components
