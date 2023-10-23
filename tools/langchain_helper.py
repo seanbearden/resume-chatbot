@@ -1,13 +1,16 @@
 from langchain.agents import AgentExecutor
 from langchain.agents.agent_toolkits import create_retriever_tool
-from langchain.chat_models import ChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
 from langchain.agents.openai_functions_agent.agent_token_buffer_memory import AgentTokenBufferMemory
 from langchain.agents.openai_functions_agent.base import OpenAIFunctionsAgent
-from langchain.schema.messages import SystemMessage
+from langchain.chat_models import ChatOpenAI
+from langchain.document_loaders import DirectoryLoader, TextLoader
+from langchain.embeddings import OpenAIEmbeddings
 from langchain.prompts import MessagesPlaceholder
+from langchain.schema.messages import SystemMessage
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.vectorstores import FAISS
 import os.path
+from tools import create_nested_directory
 
 
 def load_index_tools(documents_info, repo_path=None):
@@ -53,3 +56,20 @@ def vectordb_agent_executor_with_memory(documents_info, system_message_prompt, m
     agent_executor = AgentExecutor(agent=agent, tools=tools, memory=memory, verbose=verbose,
                                    return_intermediate_steps=True)
     return agent_executor
+
+
+def create_vector_stores(documents_info, text_only=False):
+    for tool_name, tool_info in documents_info.items():
+        if text_only:
+            loader = DirectoryLoader(tool_info['directory_path'], glob="**/*.txt", loader_cls=TextLoader)
+        else:
+            loader = DirectoryLoader(tool_info['directory_path'])
+
+        documents = loader.load()
+        text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+        texts = text_splitter.split_documents(documents)
+        embeddings = OpenAIEmbeddings()
+        db = FAISS.from_documents(texts, embeddings)
+        path = tool_info['save_path']
+        create_nested_directory(path)
+        db.save_local(path)

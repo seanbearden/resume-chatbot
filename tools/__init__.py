@@ -1,5 +1,5 @@
 from .directory_helper import create_nested_directory
 from .json_helper import save_dict_to_json, load_dict_from_json
-from .langchain_helper import load_index_tools, vectordb_agent_executor_with_memory
+from .langchain_helper import load_index_tools, vectordb_agent_executor_with_memory, create_vector_stores
 from .os_helper import get_parent_dir_path
 from .txt_helper import get_str_template
