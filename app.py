@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import session
+from flask import session, request
 from fast_dash import FastDash, dcc, dmc, Chat
 
 import os
@@ -22,12 +22,12 @@ about_template_path = './res/templates/about.txt'
 about_template = get_str_template(about_template_path)
 about = about_template.substitute(**template_kwargs)
 
-documents_info_path = './res/data/documents_info.json'
-documents_info = load_dict_from_json(documents_info_path)
-
 system_message_template_path = './res/templates/system_message_prompt.txt'
 system_message_template = get_str_template(system_message_template_path)
 system_message_prompt = system_message_template.substitute(**template_kwargs)
+
+documents_info_path = './res/data/documents_info.json'
+documents_info = load_dict_from_json(documents_info_path)
 
 memory_key = "history"
 agent_executor = vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key=memory_key,
