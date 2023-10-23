@@ -1,17 +1,19 @@
+import boto3
 from dotenv import load_dotenv
 from flask import session, request
 from fast_dash import FastDash, dcc, dmc, Chat
-
-import os
-from tools import load_dict_from_json, vectordb_agent_executor_with_memory, get_str_template, get_parent_dir_path
+import time
+from tools import load_dict_from_json, vectordb_agent_executor_with_memory, get_str_template
 
 # load API keys
 load_dotenv()
 
+# Connect to DynamoDB
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('ChatbotTable')
+
 temperature = 0.2
 model_name = 'gpt-3.5-turbo-16k'
-
-current_dir = os.getcwd()
 
 template_kwargs_path = './res/templates/template_kwargs.json'
 template_kwargs = load_dict_from_json(template_kwargs_path)
@@ -56,12 +58,16 @@ def ask_the_resume_chatbot(
     Ask questions about applicant's qualification and experience. You can ask about his education and research,
     or his work experience.
     """
+
+    timestamp = int(time.time())
+
     answer_suffix = f"Visit {website} for more information."
 
     if not query:
         answer = "Did you forget writing your query in the query box?"
 
     else:
+
         # Get chat history from Flask session
         # Tech Debt: need to pass chat history into agent.
         chat_history = session.get("chat_history", [])
@@ -71,6 +77,19 @@ def ask_the_resume_chatbot(
         result = agent_executor({"input": query})
 
         answer = result["output"]
+
+        # Get IP address
+        ip_address = request.remote_addr
+
+        response = table.put_item(
+            Item={
+                'ip_address': ip_address,
+                'timestamp': timestamp,  # You need to provide a value for the timestamp key
+                "input": query,
+                "output": answer
+            }
+        )
+
         # Save chat history back to the session cache
         chat_history.append([query, answer])
 

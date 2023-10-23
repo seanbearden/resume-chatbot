@@ -1,0 +1,18 @@
+Resources:
+  ChatbotTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ChatbotTable
+      AttributeDefinitions:
+        - AttributeName: ip_address
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: N
+      KeySchema:
+        - AttributeName: ip_address
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
