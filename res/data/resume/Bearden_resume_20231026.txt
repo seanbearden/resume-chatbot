@@ -1,0 +1,101 @@
+Sean R.B. Bearden, Ph.D.
+Data Scientist & Researcher
+Theoretical Physics Ph.D. with management experience and expertise in machine learning and applied mathematics. Use ChatGPT to chat with my resume and CV at bearden-resume-chatbot.com.
+
+WORK EXPERIENCE
+______________________________________________________________________
+
+Valmar Holdings L.L.C., Buffalo, NY
+Chief Analytics Officer	11/2020 – 10/2023
+
+●	Designed and managed unified underwriting system using integrated scikit-learns decision trees, catering to diverse lending portfolios summing to millions of dollars funded monthly.
+●	Developed and implemented lead purchasing volume forecasts to meet funding targets across various lending portfolios, by integrating call center performance metrics, attendance data, anticipated funding from alternative sources, and refinancing projections.
+●	Led the evaluation of underwriting products and developed prototype solutions for fraud detection.
+●	Collaborated with Morgan Stanley on the investment management of a multi-million-dollar portfolio, overseeing a range of financial activities and executing risk management strategies.
+
+University of California San Diego Physics Dept., San Diego, CA
+Graduate Student Researcher	09/2016 – 11/2020
+
+●	Created a dynamical system capable of optimizing large-scale problems (DARPA-funded, third-wave AI project).
+●	Benchmarked optimization algorithms, gathering extensive data for comparison in publication.
+
+Wyzant, San Diego, CA
+Private Tutor	06/2015 – 12/2019
+
+●	Tutored 100+ students, both in-person and online, in physics and mathematics, adapting to diverse learning styles.
+
+PROJECTS
+______________________________________________________________________
+
+Used Vehicle Auction Model	2021 – 2023
+
+Conceived and created a data-driven online auction bidding model for a startup, considering used-vehicle market dynamics and vehicle conditions, allowing the customer to modify bid parameters for their purchasing preferences.
+
+Banking Analysis	2023
+
+Leveraged the Chirp API for checking account data to engineer a Dockerized AWS Lambda function to analyze income patterns and repayment likelihood, yielding the creation of unique indicators to evaluate default potential, enhancing credit risk assessment processes.
+
+APR Calculator 	2023
+
+Developed and rigorously tested an AWS Lambda function designed to accurately calculate the Annual Percentage Rate (APR) for closed-end loans, strictly following the computation guidelines stipulated in the Truth in Lending Act (TILA).	CONTACT
+______________________________
+
+•   San Diego, CA (Open to Remote)
+•  +1-716-517-5880
+•  seanbearden@seanbearden.com
+•  linkedin.com/in/sean-bearden/
+•  github.com/seanbearden
+
+TECHNICAL PROFICIENCIES
+______________________________
+
+Hard Skills:
+•   Data Science
+•   Python
+•   Machine Learning/AI
+•   Debugging/Auditing
+•   Mathematical Modeling
+•   Data Visualization
+
+Techniques:
+•   Research
+•   Pattern Recognition
+•   Dashboards
+•   Test-Driven Development
+•   Scrum
+
+Tools:
+•   Pandas
+•   Plotly (Dash)
+•   OpenAI ChatGPT API
+•   LangChain
+•   AWS
+•   SQL
+•   Docker
+
+EDUCATION
+______________________________
+Univ. of California San Diego
+Ph.D. & Masters
+Theoretical Physics
+San Diego, CA — 10/2020
+
+Awards: NSF Graduate Research Fellowship, Alfred P. Sloan Scholar, UC President’s Dissertation Year Fellowship
+
+State Univ. of New York at Buffalo
+Baccalaureate
+Physics & Applied Mathematics
+Buffalo, NY — 05/2015
+
+OTHER
+_____________________________
+•   Rady School of Management Mini/Micro-MBA
+•   UCSD Leadership and Teamwork Program
+•   UCSD C/C++ Programming Certificate
+•   DataCamp Data Scientist with Python Track
+•   Storyteller on The Story Collider Podcast
+
+
+
+
+
