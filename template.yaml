@@ -1,3 +1,7 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An AWS Serverless Application to pull from DynamoDB and send reports via email.
+
 Resources:
   ChatbotTable:
     Type: AWS::DynamoDB::Table
@@ -16,3 +20,32 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
+  EmailReportFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageConfig:
+        Command: [ "app.lambda_handler" ]
+      Timeout: 15
+      Events:
+        DailyTrigger:
+          Type: Schedule
+          Properties:
+            Schedule: cron(0 6 * * ? *)
+      Policies:
+        - AmazonDynamoDBReadOnlyAccess
+        - Statement:
+          - Effect: Allow
+            Action:
+              - ses:SendEmail
+              - ses:SendRawEmail
+            Resource: "*"
+        - Statement:
+          - Effect: Allow
+            Action:
+              - ssm:GetParameter
+            Resource: arn:aws:ssm:us-east-1:047672427450:parameter/FROM_EMAIL
+    Metadata:
+      Dockerfile: Dockerfile.report
+      DockerContext: .
+      DockerTag: v1
