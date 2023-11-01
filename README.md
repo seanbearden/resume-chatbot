@@ -15,10 +15,15 @@ Explore a live demonstration at [bearden-resume-chatbot.com](https://www.bearden
 ### Deployment
 3. Prepare for Heroku deployment ensuring `gunicorn` is listed in [requirements.txt](./requirements.txt). Utilize the Heroku CLI for deployment as outlined in [Heroku's Documentation](https://devcenter.heroku.com/articles/creating-apps).
 4. Configure key-value pairs on Heroku.
-5. Run the following commands to build and deploy the application:
+5. Build and deploy using SAM, must specify Docker context `DOCKER_ENDPOINT`. Follow [these](https://github.
+   com/aws/aws-sam-cli/issues/4329#issuecomment-1732670902) instructions to determine location of host.
     ```bash
-    sam build
-    sam deploy --guided
+    DOCKER_HOST=DOCKER_ENDPOINT sam build --use-container -t template.yaml
+    DOCKER_HOST=DOCKER_ENDPOINT sam deploy --guided
+
+    ```
+5. Run the following commands to deploy on heroku:
+    ```bash
     git add .
     git commit -m "initial commit"
     git push heroku main
