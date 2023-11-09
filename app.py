@@ -13,7 +13,7 @@ dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('ChatbotTable')
 
 temperature = 0.2
-model_name = 'gpt-3.5-turbo-16k'
+model_name = 'gpt-4-1106-preview'
 
 template_kwargs_path = './res/templates/template_kwargs.json'
 template_kwargs = load_dict_from_json(template_kwargs_path)
@@ -103,6 +103,7 @@ def ask_the_resume_chatbot(
     chat = dict(query=query, response=answer)
 
     return chat
+
 
 
 # Build app (this is all it takes!). Fast Dash understands what it needs to do.
