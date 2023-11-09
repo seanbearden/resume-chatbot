@@ -55,8 +55,7 @@ def ask_the_resume_chatbot(
         query: query_component,
 ) -> Chat:
     """
-    Ask questions about applicant's qualification and experience. You can ask about his education and research,
-    or his work experience.
+    Ask questions about applicant's qualification and experience. (Using GPT-4 Turbo!)
     """
 
     timestamp = int(time.time())
