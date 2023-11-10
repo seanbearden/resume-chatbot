@@ -12,8 +12,8 @@ load_dotenv()
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('ChatbotTable')
 
-temperature = 0.2
-model_name = 'gpt-3.5-turbo-16k'
+temperature = 0.5
+model_name = 'gpt-4-1106-preview'
 
 template_kwargs_path = './res/templates/template_kwargs.json'
 template_kwargs = load_dict_from_json(template_kwargs_path)
@@ -55,8 +55,7 @@ def ask_the_resume_chatbot(
         query: query_component,
 ) -> Chat:
     """
-    Ask questions about applicant's qualification and experience. You can ask about his education and research,
-    or his work experience.
+    Ask questions about applicant's qualification and experience. (Using GPT-4 Turbo!)
     """
 
     timestamp = int(time.time())
@@ -103,6 +102,7 @@ def ask_the_resume_chatbot(
     chat = dict(query=query, response=answer)
 
     return chat
+
 
 
 # Build app (this is all it takes!). Fast Dash understands what it needs to do.
