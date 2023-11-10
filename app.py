@@ -12,7 +12,7 @@ load_dotenv()
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('ChatbotTable')
 
-temperature = 0.2
+temperature = 0.5
 model_name = 'gpt-4-1106-preview'
 
 template_kwargs_path = './res/templates/template_kwargs.json'
