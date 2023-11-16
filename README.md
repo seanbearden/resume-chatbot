@@ -9,12 +9,13 @@ Engage recruiters and hiring managers effortlessly with a chatbot that personifi
 - [Getting Started](#getting-started)
 - [Data Vector Stores](#data-vector-stores)
 - [Custom Domain](#custom-domain-optional)
-- [Usage Examples](#usage-examples)
-- [Contributing](#contributing)
-- [FAQs/Troubleshooting](#faqs/troubleshooting)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
 - [Contact](#contact)
+
+[//]: # (- [Usage Examples]&#40;#usage-examples&#41;)
+[//]: # (- [Contributing]&#40;#contributing&#41;)
+[//]: # (- [FAQs/Troubleshooting]&#40;#faqs/troubleshooting&#41;)
 
 ## Getting Started
 ### Preparation
@@ -51,14 +52,19 @@ Engage recruiters and hiring managers effortlessly with a chatbot that personifi
 ## Custom Domain (Optional)
 For a personalized domain, set up via Cloudflare. [Cloudflare setup guide](https://developers.cloudflare.com).
 
-## Usage Examples
-(Include specific text examples or screenshots demonstrating chatbot interactions)
+[//]: # (## Usage Examples)
 
-## Contributing
-(Outline how others can contribute to the project)
+[//]: # (&#40;Include specific text examples or screenshots demonstrating chatbot interactions&#41;)
 
-## FAQs/Troubleshooting
-(Address common issues or questions)
+[//]: # ()
+[//]: # (## Contributing)
+
+[//]: # (&#40;Outline how others can contribute to the project&#41;)
+
+[//]: # ()
+[//]: # (## FAQs/Troubleshooting)
+
+[//]: # (&#40;Address common issues or questions&#41;)
 
 ## Acknowledgments
 - Adapted from a Dash Gallery application: [Embedchain-Fastdash](https://github.com/dkedar7/embedchain-fastdash)
@@ -66,7 +72,8 @@ For a personalized domain, set up via Cloudflare. [Cloudflare setup guide](https
 - Chat vector database enhancement: [Langchain Documentation](https://python.langchain.com/docs/use_cases/question_answering/chat_vector_db)
 
 ## License
-(Mention the project's license here)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
-(Provide contact information for queries or contributions)
+For any queries or contributions, feel free to contact me at [seanbearden@seanbearden.com](mailto:seanbearden@seanbearden.com).
+
