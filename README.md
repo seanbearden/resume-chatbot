@@ -28,8 +28,7 @@ Engage recruiters and hiring managers effortlessly with a chatbot that personifi
 ### Deployment
 - Prepare Heroku deployment (ensure `gunicorn` in `requirements.txt`).
 - Configure key-value pairs on Heroku.
-- Build and deploy using SAM, must specify Docker context `DOCKER_ENDPOINT`. Follow [these](https://github.
-   com/aws/aws-sam-cli/issues/4329#issuecomment-1732670902) instructions to determine location of host.
+- Build and deploy using SAM, must specify Docker context `DOCKER_ENDPOINT`. Follow [these](https://github.com/aws/aws-sam-cli/issues/4329#issuecomment-1732670902) instructions to determine location of host.
     ```bash
     DOCKER_HOST=DOCKER_ENDPOINT sam build --use-container -t template.yaml
     DOCKER_HOST=DOCKER_ENDPOINT sam deploy --guided
