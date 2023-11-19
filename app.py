@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from flask import session, request
 from fast_dash import FastDash, dcc, dmc, Chat
 import time
+import uuid
 from tools import load_dict_from_json, vectordb_agent_executor_with_memory, get_str_template
 
 # load API keys
@@ -10,7 +11,7 @@ load_dotenv()
 
 # Connect to DynamoDB
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ChatbotTable')
+table = dynamodb.Table('ChatbotTableUUID')
 
 temperature = 0.5
 model_name = 'gpt-4-1106-preview'
@@ -60,6 +61,10 @@ def ask_the_resume_chatbot(
 
     timestamp = int(time.time())
 
+    # Check if UUID is in session, if not, create and store it
+    if 'user_uuid' not in session:
+        session['user_uuid'] = str(uuid.uuid4())
+
     answer_suffix = f"Visit {website} for more information."
 
     if not query:
@@ -82,10 +87,12 @@ def ask_the_resume_chatbot(
 
         response = table.put_item(
             Item={
+                'user_uuid': session['user_uuid'],
                 'ip_address': ip_address,
-                'timestamp': timestamp,  # You need to provide a value for the timestamp key
+                'timestamp': timestamp,
                 "input": query,
-                "output": answer
+                "output": answer,
+                "chat_history_length": len(chat_history)
             }
         )
 
