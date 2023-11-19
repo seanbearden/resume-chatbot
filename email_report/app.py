@@ -33,6 +33,7 @@ def lambda_handler(event, context):
         pacific_dt = utc_dt.astimezone(pytz.timezone('US/Pacific'))
         formatted_time = pacific_dt.strftime('%Y-%m-%d %H:%M:%S %Z')
 
+        email_body += f"User UUID: {item['user_uuid']}\n"
         email_body += f"IP Address: {item['ip_address']}\n"
         email_body += f"Timestamp: {formatted_time}\n"
         email_body += f"Input: {item['input']}\n"
