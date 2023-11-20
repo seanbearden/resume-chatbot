@@ -1,10 +1,11 @@
 from langchain.agents import AgentExecutor
 from langchain.agents.agent_toolkits import create_retriever_tool
-from langchain.agents.openai_functions_agent.agent_token_buffer_memory import AgentTokenBufferMemory
 from langchain.agents.openai_functions_agent.base import OpenAIFunctionsAgent
 from langchain.chat_models import ChatOpenAI
 from langchain.document_loaders import DirectoryLoader, TextLoader
 from langchain.embeddings import OpenAIEmbeddings
+from langchain.memory import ConversationBufferMemory
+from langchain.memory.chat_message_histories import DynamoDBChatMessageHistory
 from langchain.prompts import MessagesPlaceholder
 from langchain.schema.messages import SystemMessage
 from langchain.text_splitter import CharacterTextSplitter
@@ -35,12 +36,16 @@ def load_index_tools(documents_info, repo_path=None):
 
 def vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key="chat_history",
                                         temperature=0.3, repo_path=None,
-                                        model_name='gpt-3.5-turbo', verbose=False):
+                                        model_name='gpt-3.5-turbo', verbose=False, user_uuid="DEFAULT",
+                                        output_key='output'):
     # Load the language model
     llm = ChatOpenAI(model_name=model_name, temperature=temperature)
-    # This is needed for both the memory and the prompt
+    # set up memory
+    message_history = DynamoDBChatMessageHistory(table_name="SessionTable", session_id=user_uuid)
+    memory = ConversationBufferMemory(
+        memory_key=memory_key, chat_memory=message_history, output_key=output_key, return_messages=True,
 
-    memory = AgentTokenBufferMemory(memory_key=memory_key, llm=llm)
+    )
 
     system_message = SystemMessage(content=(system_message_prompt))
 
