@@ -1,20 +1,25 @@
 import boto3
 from datetime import datetime, timedelta
+import os
 import pytz
+
 
 def lambda_handler(event, context):
     days_back = 1
+    last_updated = 'LastUpdated'
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('ChatbotTable')
+    table = dynamodb.Table(os.environ['SESSION_TABLE_NAME'])
     now = datetime.now(pytz.timezone('US/Pacific'))
-    twenty_four_hours_ago = now - timedelta(hours=days_back * 24)
-    twenty_four_hours_ago_timestamp = int(twenty_four_hours_ago.timestamp())
+
+    # Calculate the timestamp for 24 hours ago
+    twenty_four_hours_ago = datetime.now() - timedelta(days=days_back)
+    twenty_four_hours_ago_timestamp = twenty_four_hours_ago.isoformat()
 
     # Scan the DynamoDB table for relevant entries
     response = table.scan(
         FilterExpression='#ts >= :timestamp',
         ExpressionAttributeNames={
-            '#ts': 'timestamp',
+            '#ts': last_updated,  # Replace with the actual name of your timestamp attribute
         },
         ExpressionAttributeValues={
             ':timestamp': twenty_four_hours_ago_timestamp
@@ -22,22 +27,25 @@ def lambda_handler(event, context):
     )
 
     # Convert Decimal to int for comparison, and sort the list of dictionaries
-    sorted_items = sorted(response['Items'], key=lambda x:  x['timestamp'])
+    sorted_items = sorted(response['Items'], key=lambda x:  x[last_updated])
 
     # Update the original dictionary with the sorted list
     response['Items'] = sorted_items
 
     email_body = ''
     for item in response['Items']:
-        utc_dt = datetime.utcfromtimestamp(int(item['timestamp'])).replace(tzinfo=pytz.utc)
-        pacific_dt = utc_dt.astimezone(pytz.timezone('US/Pacific'))
-        formatted_time = pacific_dt.strftime('%Y-%m-%d %H:%M:%S %Z')
+        formatted_time = item[last_updated]
 
-        email_body += f"User UUID: {item['user_uuid']}\n"
-        email_body += f"IP Address: {item['ip_address']}\n"
-        email_body += f"Timestamp: {formatted_time}\n"
-        email_body += f"Input: {item['input']}\n"
-        email_body += f"Output: {item['output']}\n\n"
+        email_body += f"User UUID: {item['SessionId']}\n"
+        email_body += f"Timestamp: {formatted_time}\n\n"
+        for message in item.get('History', []):
+            content = message.get('data', {}).get('content', '')
+            if message['type'] == 'human':
+                email_body += f"Human: {content}\n\n"
+            elif message['type'] == 'ai':
+                email_body += f"AI: {content}\n\n"
+            else:
+                email_body += f"UNKNOWN: {content}\n\n"
 
     if not email_body:
         email_body += f"No interactions in the past {days_back} days"

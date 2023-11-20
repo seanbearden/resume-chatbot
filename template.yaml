@@ -11,9 +11,21 @@ Resources:
       AttributeDefinitions:
         - AttributeName: SessionId
           AttributeType: S
+        - AttributeName: LastUpdated
+          AttributeType: S
       KeySchema:
         - AttributeName: SessionId
           KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: TimestampIndex
+          KeySchema:
+            - AttributeName: SessionId
+              KeyType: HASH
+            - AttributeName: LastUpdated
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
 
   EmailReportFunction:
     Type: AWS::Serverless::Function
@@ -21,7 +33,10 @@ Resources:
       PackageType: Image
       ImageConfig:
         Command: [ "app.lambda_handler" ]
-      Timeout: 15
+      Timeout: 60
+      Environment:
+        Variables:
+          SESSION_TABLE_NAME: !Ref SessionTable
       Events:
         DailyTrigger:
           Type: Schedule

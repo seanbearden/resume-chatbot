@@ -1,3 +1,5 @@
+import boto3
+from datetime import datetime
 from dotenv import load_dotenv
 from dash import html
 from flask import session, request
@@ -12,6 +14,10 @@ from langchain.memory.chat_message_histories import DynamoDBChatMessageHistory
 
 # load API keys
 load_dotenv()
+
+# Connect to DynamoDB
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('SessionTable')
 
 temperature = 0.5
 model_name = 'gpt-4-1106-preview'
@@ -82,6 +88,14 @@ def ask_the_resume_chatbot(
 
         # Generate a response
         result = agent_executor({"input": query})
+
+        timestamp = datetime.utcnow().isoformat()  # Current timestamp
+
+        table.update_item(
+            Key={'SessionId': user_uuid},
+            UpdateExpression='SET LastUpdated = :val',
+            ExpressionAttributeValues={':val': timestamp}
+        )
 
         answer = result["output"]
 
