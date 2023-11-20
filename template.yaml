@@ -1,21 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: An AWS Serverless Application to converse with OpenAI agent
+
 Resources:
-  ChatbotTable:
+  SessionTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ChatbotTableUUID
+      TableName: SessionTable
+      BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
-        - AttributeName: user_uuid
+        - AttributeName: SessionId
           AttributeType: S
-        - AttributeName: timestamp
-          AttributeType: N
       KeySchema:
-        - AttributeName: user_uuid
+        - AttributeName: SessionId
           KeyType: HASH
-        - AttributeName: timestamp
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 5
-        WriteCapacityUnits: 5
 
   EmailReportFunction:
     Type: AWS::Serverless::Function
@@ -30,7 +28,7 @@ Resources:
           Properties:
             Schedule: cron(0 6 * * ? *)
       Policies:
-        - AmazonDynamoDBReadOnlyAccess
+        - AmazonDynamoDBFullAccess
         - Statement:
           - Effect: Allow
             Action:

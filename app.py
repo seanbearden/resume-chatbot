@@ -2,16 +2,20 @@ import boto3
 from dotenv import load_dotenv
 from flask import session, request
 from fast_dash import FastDash, dcc, dmc, Chat
+import os
 import time
 import uuid
 from tools import load_dict_from_json, vectordb_agent_executor_with_memory, get_str_template
 
+from langchain.memory import ConversationBufferMemory
+from langchain.memory.chat_message_histories import DynamoDBChatMessageHistory
+
 # load API keys
 load_dotenv()
 
-# Connect to DynamoDB
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('ChatbotTableUUID')
+# # Connect to DynamoDB
+# dynamodb = boto3.resource('dynamodb')
+# table = dynamodb.Table('SessionTable')
 
 temperature = 0.5
 model_name = 'gpt-4-1106-preview'
@@ -32,7 +36,7 @@ system_message_prompt = system_message_template.substitute(**template_kwargs)
 documents_info_path = './res/data/documents_info.json'
 documents_info = load_dict_from_json(documents_info_path)
 
-memory_key = "history"
+memory_key = "chat_history"
 agent_executor = vectordb_agent_executor_with_memory(documents_info, system_message_prompt, memory_key=memory_key,
                                                      temperature=temperature,
                                                      model_name=model_name, verbose=True)
@@ -72,34 +76,19 @@ def ask_the_resume_chatbot(
 
     else:
 
-        # Get chat history from Flask session
-        # Tech Debt: need to pass chat history into agent.
-        chat_history = session.get("chat_history", [])
+        # Get chat history from DynamoDB
+        user_uuid = session['user_uuid']
+
+        message_history = DynamoDBChatMessageHistory(table_name="SessionTable", session_id=user_uuid)
+        session_memory = ConversationBufferMemory(
+            memory_key=memory_key, chat_memory=message_history, output_key='output', return_messages=True
+        )
+        agent_executor.memory = session_memory
 
         # Generate a response
-        # result = agent({"question": query, memory_key: chat_history})
         result = agent_executor({"input": query})
 
         answer = result["output"]
-
-        # Get IP address
-        ip_address = request.remote_addr
-
-        response = table.put_item(
-            Item={
-                'user_uuid': session['user_uuid'],
-                'ip_address': ip_address,
-                'timestamp': timestamp,
-                "input": query,
-                "output": answer,
-                "chat_history_length": len(chat_history)
-            }
-        )
-
-        # Save chat history back to the session cache
-        chat_history.append([query, answer])
-
-        session["chat_history"] = chat_history
 
         answer = f"""{answer}
 
@@ -120,7 +109,7 @@ app = FastDash(
     about=about
 )
 server = app.server
-server.config["SECRET_KEY"] = "Some key"
+server.config["SECRET_KEY"] = os.environ['FLASK_SECRET_KEY']
 
 if __name__ == "__main__":
     app.run()
