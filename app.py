@@ -1,5 +1,5 @@
-import boto3
 from dotenv import load_dotenv
+from dash import html
 from flask import session, request
 from fast_dash import FastDash, dcc, dmc, Chat
 import os
@@ -13,10 +13,6 @@ from langchain.memory.chat_message_histories import DynamoDBChatMessageHistory
 # load API keys
 load_dotenv()
 
-# # Connect to DynamoDB
-# dynamodb = boto3.resource('dynamodb')
-# table = dynamodb.Table('SessionTable')
-
 temperature = 0.5
 model_name = 'gpt-4-1106-preview'
 
@@ -24,6 +20,7 @@ template_kwargs_path = './res/templates/template_kwargs.json'
 template_kwargs = load_dict_from_json(template_kwargs_path)
 name = template_kwargs['name']
 website = template_kwargs['website']
+answer_suffix = f"Visit {website} for more information."
 
 about_template_path = './res/templates/about.txt'
 about_template = get_str_template(about_template_path)
@@ -69,8 +66,6 @@ def ask_the_resume_chatbot(
     if 'user_uuid' not in session:
         session['user_uuid'] = str(uuid.uuid4())
 
-    answer_suffix = f"Visit {website} for more information."
-
     if not query:
         answer = "Did you forget writing your query in the query box?"
 
@@ -108,6 +103,9 @@ app = FastDash(
     linkedin_url=template_kwargs.get("linkedin_url", "https://www.linkedin.com/"),
     about=about
 )
+# TODO: Only display when mobile detected.
+app.layout_object.inputs.append(dmc.Alert('Scroll down to see response if using mobile device.'))
+
 server = app.server
 server.config["SECRET_KEY"] = os.environ['FLASK_SECRET_KEY']
 
