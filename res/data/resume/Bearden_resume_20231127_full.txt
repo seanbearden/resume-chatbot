@@ -1,0 +1,246 @@
+Sean R.B. Bearden, Ph.D.
+Data Scientist & Researcher
+Theoretical Physics Ph.D. with management experience and expertise in machine learning and applied mathematics. Use ChatGPT to chat with my resume and CV at bearden-resume-chatbot.com.
+
+WORK EXPERIENCE
+______________________________________________________________________
+
+Valmar Holdings L.L.C., Buffalo, NY
+Chief Analytics Officer	11/2020 – 10/2023
+
+●	Designed and managed unified underwriting system using integrated scikit-learns decision trees, catering to diverse lending portfolios summing to millions of dollars funded monthly.
+●	Developed and implemented a lead purchasing volume forecast model to meet funding goals across various lending portfolios, by integrating call center performance metrics, attendance data, anticipated funding from alternative sources, and refinancing projections.
+●	Led the evaluation of underwriting products and developed prototype solutions for fraud detection.
+●	Collaborated with Morgan Stanley on the investment management of a multi-million-dollar portfolio, overseeing a range of financial activities and executing risk management strategies.
+●	Reduced lead purchasing cost-per-funding to lowest levels in company history.
+●	Modified defaulted loan write-off policy to reduce collection efforts on customers by 50% without significant reduction to funds collected prior to write-off.
+
+University of California San Diego Physics Dept., San Diego, CA
+Graduate Student Researcher	09/2016 – 11/2020
+
+●	Created a dynamical system capable of optimizing large-scale problems (DARPA-funded, third-wave AI project).
+●	Benchmarked optimization algorithms, gathering extensive data for comparison in publication.
+●	Modified dynamical system to sample the mode of the model distribution of a restricted Boltzmann machine by solving a QUBO problem mapped into a MAX-2-SAT problem.
+●	Studied recurrent neural networks and used an echo state network for time-series forecasting of cellular automata.
+
+Wyzant, San Diego, CA
+Private Tutor	06/2015 – 12/2019
+
+●	Tutored 100+ students, both in-person and online, adapting to diverse learning styles.
+●	Catered to many subjects at the high school and college level, including mathematics, physics, (partial) differential equations, machine learning, Mathematica, MATLAB, and Python.
+●	Consulted for futures trader, generating results counter to contracted developer, saving more than $10,000.
+
+PROJECTS
+______________________________________________________________________
+
+Used Vehicle Auction Model	2021 – 2023
+
+In a pioneering initiative for a startup, I spearheaded the development of a sophisticated, data-driven online auction bidding model tailored to the used vehicle market. This model was meticulously designed to account for the dynamic nuances of market trends and vehicle conditions, offering an unparalleled level of customization in bid parameter adjustments based on individual customer preferences.
+Key Contributions and Technical Implementation:
+●	Data Collection and Management:
+○	Diligently carried out the evaluation and integration of comprehensive used vehicle data from multiple vendors nationwide, ensuring a robust and diverse dataset for the auction model.
+○	Implemented a robust data organization strategy using BigQuery PostgreSQL to maintain an up-to-date and accurate relational database, ensuring daily data refreshes.
+
+●	Analytical Model Development:
+○	Developed a predictive model for used vehicle sale prices, leveraging advanced statistical methods and data analysis techniques.
+○	Utilized isotonic regression, augmented with custom modifications, to create a reliable price prediction model. This approach was especially chosen to address the non-linear correlation between vehicle mileage and listing price, ensuring accurate market valuation across diverse vehicle conditions.
+
+●	Market Trend Analysis:
+○	Analyzed and identified key trends in the national and local used car markets, effectively predicting price quantiles based on various vehicle attributes including year, make, model, trim, VIN, mileage, and color.
+○	Employed sophisticated algorithms to detect and handle outliers, differentiating between data deviations due to unique vehicle features and erroneous data inputs.
+
+●	API Integration and Real-Time Auction Monitoring:
+○	Integrated the model with the ACV Auctions API, enabling real-time monitoring and identification of vehicles on a customized watchlist.
+○	Applied a comprehensive set of nearly 100 vehicle condition filters to assess and select vehicles for auction bidding.
+
+●	Customer-Centric Interface Design:
+○	Collaborated closely with industry experts and dealerships to gain in-depth insights into customer strategies and preferences in auction settings.
+○	As the Product Owner within a Scrum team, I led the design and development of an intuitive online user interface, allowing customers to specify conditions and price parameters tailored to their unique business models.
+
+●	Automated Bidding and Reporting:
+○	Implemented a system for automated bidding, enhancing the efficiency and effectiveness of the auction process.
+○	Developed a streamlined communication system using yagmail and Twilio to deliver auction reports and updates, ensuring timely and accurate information dissemination to clients.
+Outcomes:
+This project marked a significant leap in bridging data science with practical market applications, resulting in a tool that both informs and empowers users within the competitive landscape of used vehicle auctions. In my role, I not only demonstrated a blend of analytical prowess and technical acumen but also worked closely with stakeholders to ensure effective communication of the project's needs and status. This collaborative approach, coupled with a focus on user-centric design, was instrumental in developing a product that exemplifies innovative problem-solving and dedicated customer service in the data-driven auction domain.
+
+Checking Account Analysis	2023
+
+In a strategic effort to enhance credit risk assessment processes, I developed a sophisticated system leveraging the Chirp API (chirp.digital) for checking account data analysis. This project involved engineering a Dockerized AWS Lambda function aimed at analyzing income patterns and repayment likelihood of loan applicants. The goal was to create unique indicators that could accurately evaluate the potential for default, thereby refining the credit risk assessment process.
+Key Contributions and Technical Implementation:
+●	Data Collection and Integration:
+○	Accessed and analyzed banking data from current customers who provided their banking details to Chirp.
+○	Performed comprehensive explorations of account data to devise a robust assessment methodology.
+
+●	Algorithm Design for Financial Assessment:
+○	Crafted algorithms to scrutinize customers' financial health, focusing on their ability to repay new loans based on income and existing financial commitments.
+○	Implemented logic to subtract recurring payments from monthly direct deposit income, offering a clear picture of a customer's feasible monthly repayment capacity.
+
+●	Risk Analysis and Indicator Development:
+○	Developed a suite of summaries and indicators based on checking account analysis, effectively predicting the likelihood of loan repayment.
+○	Created a nuanced, multi-faceted approach to assessing credit risk, enhancing the accuracy of default predictions.
+
+●	Compliance and Transparency:
+○	Ensured that the algorithm provides clear reasons for loan application denials, maintaining compliance with the Equal Credit Opportunity Act (ECOA).
+○	Prioritized transparency in the credit assessment process, aligning with regulatory standards and ethical lending practices.
+Outcomes:
+This project culminated in the creation of a dynamic, configurable, data-driven tool that significantly advances the credit risk assessment capabilities of lending institutions. By integrating advanced data analysis techniques with regulatory compliance, I was able to deliver a solution that not only predicts repayment likelihood with greater accuracy but also maintains fairness and transparency in the loan approval process. The Checking Account Analysis project stands as a testament to my ability to combine technical expertise with a deep understanding of financial regulations, resulting in improved financial decision-making tools.
+
+Underwriting with Decision Trees 	2022-2023
+
+Developed an innovative decision tree model using scikit-learn classifiers and regressors to optimize the use of various underwriting products, enhancing both efficiency and cost-effectiveness in the loan decisioning process.
+Key Contributions and Technical Implementation:
+●	Model Design and Implementation:
+○	Crafted a model from scikit-learn decision tree classifiers and regressors, specifically tailored to integrate seamlessly with the interface of a third-party service used for lead purchasing.
+○	Ensured the model's compliance with the Fair Credit Reporting Act, focusing on interpretability in cases of loan denial to provide justifications upon request.
+
+●	Strategic Use of Underwriting Products:
+○	Designed a multi-stage decision process using a series of decision trees.
+○	Strategically employed more cost-effective underwriting products in the initial stages, progressing to comprehensive underwriting as leads advanced through the decision trees.
+○	Managed the cost implications by selectively withholding information until later stages of decision-making.
+
+●	Balancing ROI, Volume, and Costs:
+○	Tailored the trees to optimize return on investment (ROI) while simultaneously boosting loan origination rates.
+○	Implemented a filtering mechanism post each tree stage, allowing for lead selection based on justifiable ROI and volume loss considerations, in line with portfolio performance expectations.
+○	Achieved a delicate balance between maximizing ROI, managing lead purchasing volume, and minimizing the cost per funded loan.
+
+●	Model Interpretability and Stakeholder Engagement:
+○	Prioritized the interpretability of the decision-making process, ensuring transparency and understandability for both auditors and stakeholders.
+○	Engaged stakeholders throughout the development process, incorporating feedback to refine and align the model with business objectives.
+Outcomes:
+This project marked a significant advancement in the loan underwriting process, moving from a rigid waterfall method to a more dynamic and flexible decision tree approach. The model's success lay in its ability to integrate multiple underwriting products effectively, maintain regulatory compliance, and provide clear, explainable outcomes. The strategic design resulted in improved ROI, higher loan origination rates, and cost-efficient decisioning, exemplifying innovative problem-solving and efficient resource management in financial decision-making.
+
+Lead Purchasing Forecast 	2022-2023
+
+Developed an advanced forecasting model to optimize the daily lead purchasing process for loan officers in a call center, focusing on achieving monthly funding goals efficiently while maintaining high loan origination rates and return on investment.
+Key Contributions and Technical Implementation:
+●	Model Development for Efficient Lead Purchasing:
+○	Designed a predictive model to calculate the expected volume of refinanced loans, returning customers, and organically acquired customers.
+○	Integrated projections of potential funding received by these customer segments to determine the remaining funding goal allocation for lead purchasing.
+
+●	Incorporating Call Center Performance Metrics:
+○	Analyzed call-center performance data over a trailing period to adjust funding goal projections.
+○	Developed a system to calculate the expected loan conversion rate for each call center employee, ensuring lead purchasing volumes were manageable and aligned with staff capacity.
+○	Factored in call-center attendance, enabling short-term adjustments in lead purchasing in response to changes in personnel availability, such as the absence of top-performing loan officers.
+
+●	Dynamic Adjustment and Insightful Forecasting:
+○	Utilized the forecasting model throughout each month to continuously assess the likelihood of meeting funding goals.
+○	Provided valuable foresight, enabling proactive adjustments in call-center operation and preventing performance issues associated with end-of-month goal chasing.
+Outcomes:
+This project significantly enhanced the efficiency of lead purchasing and loan origination processes. By integrating detailed analyses of customer expectations and call center performance, the model offered a more strategic approach to lead management. The successful implementation of this model resulted in a more balanced and effective allocation of resources, leading to improved performance and achievement of funding objectives without compromising on loan quality or staff workload.
+
+Stock Market Analysis 	2021-2023
+
+Developed sophisticated models for stock market analysis focusing on low-risk, high-return strategies, using machine learning techniques. The primary goal was to construct a swing trading model capable of yielding profits regardless of market conditions.
+Key Contributions and Technical Implementation:
+●	Deep Learning Application:
+○	Implemented a model based on deep convolutional neural networks (CNNs), inspired by a research paper that used CNNs to analyze stock market technical indicators as time series images.
+○	Adapted TensorFlow and Keras for the development and optimization of the model.
+
+●	Model Refinement and Strategy Shift:
+○	Initially, the CNN model showed potential but led to high volatility, impacting profitability.
+○	Shifted focus to option contract trading, specifically trading option strangles and straddles, to balance profitability with reduced volatility.
+○	Developed a pattern-recognition algorithm targeting trading patterns aligned with mean reversion expectations.
+
+●	Stakeholder Feedback and Strategy Adjustment:
+○	Following real-time application and analysis, stakeholders revised their goals, opting for more manageable profit margins with reduced volatility.
+○	Collaborated with a financial advisor after his initial investment of several million dollars on behalf of stakeholders, led to a 20% drawdown due to poor market timing.
+○	Directed to devise a strategy that minimizes volatility without significant alteration of existing stock shares in the portfolio.
+
+●	Strategy Implementation and Outcome:
+○	Jointly with the financial advisor, developed a strategy focusing on writing covered calls on current portfolio positions.
+○	This approach generated income in a downward trending market and mitigated losses from unforeseen price movements.
+○	Successfully reduced volatility to a level satisfactory to stakeholders, leading the portfolio from its lowest to its highest value.
+Outcomes:
+This project highlighted the importance of adaptability and continuous refinement in financial modeling. The successful implementation of a revised trading strategy underscored my ability to balance stakeholder expectations with market realities, achieving a significant turnaround in portfolio performance.
+
+APR Calculator 	2023
+
+I initiated the development of an AWS Lambda function to accurately compute the Annual Percentage Rate (APR) for closed-end loans. This initiative was meticulously aligned with the stringent computation guidelines set forth in the Truth in Lending Act (TILA), ensuring full compliance and precision in APR calculations.
+Key Contributions and Technical Implementation:
+●	Development of AWS Lambda Function:
+○	Engineered a robust AWS Lambda function dedicated to the precise calculation of APR, adhering to the specific computational mandates of the Truth in Lending Act.
+○	Focused on creating an efficient, scalable solution suitable for various financial applications and environments.
+
+●	Code Documentation and Compliance:
+○	Ensured thorough documentation of the code, meticulously aligning it with the detailed stipulations in Appendix J of Regulation Z.
+○	Prioritized transparency and clarity in code structure to facilitate potential audits and regulatory reviews.
+
+●	Comprehensive Testing:
+○	Conducted exhaustive testing of the APR calculation functionality, covering a wide range of scenarios and examples, including those outlined in Appendix J of Regulation Z.
+○	Implemented rigorous testing protocols to validate the accuracy and reliability of the APR calculations under diverse financial conditions.
+
+●	Efficiency Optimization:
+○	Optimized the Python code for peak efficiency, strategically utilizing only native Python packages to minimize the time required for cold starts.
+○	Achieved a balance between computational efficiency and compliance, ensuring fast and reliable APR calculations.
+Outcomes:
+The APR Calculator project successfully delivered a high-performance, compliant tool, pivotal for accurate financial computations in the realm of closed-end loans. My role in this project not only involved technical development but also a keen focus on compliance and efficiency. This approach resulted in a reliable and user-friendly tool, reinforcing the importance of precision and adherence to regulatory standards in financial calculations. The project stands as a testament to my ability to develop solutions that are not only technically sound but also compliant and efficient in meeting industry-specific needs.
+	CONTACT
+______________________________
+
+•   San Diego, CA (Open to Remote)
+•  +1-716-517-5880
+•  seanbearden@seanbearden.com
+•  linkedin.com/in/sean-bearden/
+•  github.com/seanbearden
+
+TECHNICAL PROFICIENCIES
+______________________________
+
+Hard Skills:
+•   Data Science
+•   Python
+•   Machine Learning/AI
+•   Debugging/Auditing
+•   Mathematical Modeling
+•   Data Visualization
+•   Presentations
+
+Techniques:
+•   Research
+•   Pattern Recognition
+•   Dashboards
+•   Test-Driven Development
+•   Scrum (Agile)
+
+Tools:
+•   scikit-learn
+•   TensorFlow
+•   Plotly (Dash)
+•   OpenAI API
+•   LangChain
+•   AWS
+•   SQL
+•   Docker
+•   Heroku
+•   Flask
+•   GCP BigQuery
+
+EDUCATION
+______________________________
+Univ. of California San Diego
+Ph.D. & Masters
+Theoretical Physics
+San Diego, CA — 10/2020
+
+Awards: NSF Graduate Research Fellowship, Alfred P. Sloan Scholar, UC President’s Dissertation Year Fellowship
+
+State Univ. of New York at Buffalo
+Baccalaureate
+Physics & Applied Mathematics
+Buffalo, NY — 05/2015
+
+Awards: Barry M. Goldwater Scholarship
+
+Ohio University
+Associate
+Natural Sciences
+Buffalo, NY — 06/2011
+
+
+OTHER
+_____________________________
+•   Rady School of Management Mini/Micro-MBA
+•   UCSD Extension and grAdvantage’s Leadership and Teamwork Program
+•   UCSD Extension C/C++ Programming Certificate
+•   DataCamp Data Scientist with Python Track
+•   Storyteller on The Story Collider Podcast

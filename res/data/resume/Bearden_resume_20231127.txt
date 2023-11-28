@@ -9,8 +9,8 @@ ______________________________________________________________________
 Valmar Holdings L.L.C., Buffalo, NY
 Chief Analytics Officer	11/2020 – 10/2023
 
-●	Designed and managed unified underwriting system using integrated scikit-learns decision trees, catering to diverse lending portfolios summing to millions of dollars funded monthly.
-●	Developed and implemented lead purchasing volume forecasts to meet funding targets across various lending portfolios, by integrating call center performance metrics, attendance data, anticipated funding from alternative sources, and refinancing projections.
+●	Designed and managed unified underwriting system using integrated scikit-learn decision trees, catering to diverse lending portfolios summing to millions of dollars funded monthly.
+●	Developed and implemented a lead purchasing volume forecast model to meet funding goals across various lending portfolios, by integrating call center performance metrics, attendance data, anticipated funding from alternative sources, and refinancing projections.
 ●	Led the evaluation of underwriting products and developed prototype solutions for fraud detection.
 ●	Collaborated with Morgan Stanley on the investment management of a multi-million-dollar portfolio, overseeing a range of financial activities and executing risk management strategies.
 
@@ -23,22 +23,19 @@ Graduate Student Researcher	09/2016 – 11/2020
 Wyzant, San Diego, CA
 Private Tutor	06/2015 – 12/2019
 
-●	Tutored 100+ students, both in-person and online, in physics and mathematics, adapting to diverse learning styles.
+●	Tutored 100+ students, both in-person and online, in college-level physics and mathematics, adapting to diverse learning styles.
+
 
 PROJECTS
 ______________________________________________________________________
 
 Used Vehicle Auction Model	2021 – 2023
 
-Conceived and created a data-driven online auction bidding model for a startup, considering used-vehicle market dynamics and vehicle conditions, allowing the customer to modify bid parameters for their purchasing preferences.
+Conceived and created a data-driven online auction bidding model for the used vehicle market, which involved integrating comprehensive vehicle data, creating predictive pricing models, and designing a customer-centric interface to enable tailored bidding strategies. This innovative tool significantly improved market valuation accuracy and bidding efficiency, representing a breakthrough in bridging data science with practical market applications.
 
-Banking Analysis	2023
+Underwriting with Decision Trees	2022 – 2023
 
-Leveraged the Chirp API for checking account data to engineer a Dockerized AWS Lambda function to analyze income patterns and repayment likelihood, yielding the creation of unique indicators to evaluate default potential, enhancing credit risk assessment processes.
-
-APR Calculator 	2023
-
-Developed and rigorously tested an AWS Lambda function designed to accurately calculate the Annual Percentage Rate (APR) for closed-end loans, strictly following the computation guidelines stipulated in the Truth in Lending Act (TILA).	CONTACT
+Developed a sophisticated decision tree model using scikit-learn to optimize loan underwriting, integrating various products and ensuring compliance with the Fair Credit Reporting Act, resulting in a more efficient, cost-effective, and transparent loan decisioning process. This innovative approach effectively replaced the rigid waterfall method with a dynamic, multi-stage decision-making process, enhancing both ROI and loan origination rates.	CONTACT
 ______________________________
 
 •   San Diego, CA (Open to Remote)
@@ -66,13 +63,13 @@ Techniques:
 •   Scrum
 
 Tools:
-•   Pandas
-•   Plotly (Dash)
-•   OpenAI ChatGPT API
-•   LangChain
+•   scikit-learn
+•   TensorFlow
 •   AWS
 •   SQL
 •   Docker
+•   OpenAI API
+•   LangChain
 
 EDUCATION
 ______________________________
@@ -95,8 +92,3 @@ _____________________________
 •   UCSD C/C++ Programming Certificate
 •   DataCamp Data Scientist with Python Track
 •   Storyteller on The Story Collider Podcast
-
-
-
-
-
